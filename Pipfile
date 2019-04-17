@@ -11,6 +11,9 @@ jupyter = "*"
 matplotlib = "*"
 numpy = "*"
 pandas = "*"
-
+opencv-python = "*"
+pillow = "*"
+scikit-image = "*"
+scipy = "*"
 [requires]
 python_version = "3.7"
