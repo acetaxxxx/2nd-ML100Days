@@ -16,6 +16,7 @@ pillow = "*"
 scikit-image = "*"
 scipy = "*"
 requests = "*"
+sklearn = "*"
 
 [requires]
 python_version = "3.7"
