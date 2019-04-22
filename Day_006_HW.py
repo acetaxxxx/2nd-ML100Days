@@ -103,7 +103,8 @@ print(app_train['REGION_POPULATION_RELATIVE'].describe())
 """
 Your Code Here
 """
-cdf = 
+cdf = app_train['REGION_POPULATION_RELATIVE'].sort_values()/app_train['REGION_POPULATION_RELATIVE'].max()
+cdf =cdf.reset_index(drop=True)
 
 
 plt.plot(list(cdf.index), cdf/cdf.max())
@@ -148,16 +149,19 @@ print(app_train['OBS_60_CNT_SOCIAL_CIRCLE'].value_counts().sort_index(ascending 
 # ## 注意：當 histogram 畫出上面這種圖 (只出現一條，但是 x 軸延伸很長導致右邊有一大片空白時，代表右邊有值但是數量稀少。這時可以考慮用 value_counts 去找到這些數值
 
 #%%
+t = app_train['OBS_60_CNT_SOCIAL_CIRCLE']
+t = t.where(t>20)
+print(t.index)
+#%%
 # 把一些極端值暫時去掉，在繪製一次 Histogram
 # 選擇 OBS_60_CNT_SOCIAL_CIRCLE 小於 20 的資料點繪製
 """
 Your Code Here
 """
-loc_a = list(app_train[app_train[['OBS_60_CNT_SOCIAL_CIRCLE']]<20].index)
+loc_a = list(app_train[app_train['OBS_60_CNT_SOCIAL_CIRCLE']<20].index)
 loc_b = ['OBS_60_CNT_SOCIAL_CIRCLE']
-print(loc_a)
-# app_train.loc[loc_a, loc_b].hist()
-# plt.show()
+app_train.loc[loc_a, loc_b].hist()
+plt.show()
 
 
 
