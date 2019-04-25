@@ -30,8 +30,8 @@ get_ipython().run_line_magic('matplotlib', 'inline')
 #%%
 # 隨機生成兩組 1000 個介於 0~50 的數的整數 x, y, 看看相關矩陣如何
 x = np.random.randint(0, 50, 1000)
-y = np.random.randint(0, 50, 1000)
-
+y = np.sort(np.random.randint(0, 50, 1000))[::-1]
+print(y)
 # 呼叫 numpy 裡的相關矩陣函數 (corrcoef)
 np.corrcoef(x, y)
 
@@ -48,7 +48,7 @@ plt.scatter(x, y)
 x = np.random.randint(0, 50, 1000)
 
 # 這次讓 y 與 x 正相關，再增加一些雜訊
-y = x + np.random.normal(0, 10, 1000)
+y = -x + np.random.normal(0, 10, 1000)
 
 # 再次用 numpy 裡的函數來計算相關係數
 np.corrcoef(x, y)

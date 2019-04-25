@@ -66,8 +66,8 @@ grouped_df.mean()
 """
 Your code here
 """
-plt_column = grouped_df.column
-plt_by = grouped_df.mean()
+plt_column = 'AMT_INCOME_TOTAL'
+plt_by = 'CNT_CHILDREN_GROUP'
 
 app_train.boxplot(column=plt_column, by = plt_by, showfliers = False, figsize=(12,12))
 plt.suptitle('')
@@ -79,8 +79,11 @@ plt.show()
 """
 Your code here
 """
-app_train['AMT_INCOME_TOTAL_Z_BY_CHILDREN_GRP-TARGET'] = grouped_df.apply(lambda x: )
+app_train['AMT_INCOME_TOTAL_Z_BY_CHILDREN_GRP-TARGET'] = grouped_df.apply(lambda x: (x-x.mean())/x.std())
 
 app_train[['AMT_INCOME_TOTAL','AMT_INCOME_TOTAL_Z_BY_CHILDREN_GRP-TARGET']].head()
 
 
+
+
+#%%
