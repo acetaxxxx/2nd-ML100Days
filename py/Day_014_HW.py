@@ -41,13 +41,13 @@ print('Path of read in data: %s' % (f_app))
 app_train = pd.read_csv(f_app)
 app_train.head()
 
-#%%
-from sklearn.preprocessing import LabelEncoder
+# #%%
+# from sklearn.preprocessing import LabelEncoder
 
-le = LabelEncoder()
-app_train['HOUSETYPE_MODE'].replace({np.nan:''},inplace=True)
-le.fit(app_train['HOUSETYPE_MODE'])
-app_train['HOUSETYPE_MODE'] = le.fit_transform(app_train['HOUSETYPE_MODE'])
+# le = LabelEncoder()
+# app_train['HOUSETYPE_MODE'].replace({np.nan:''},inplace=True)
+# le.fit(app_train['HOUSETYPE_MODE'])
+# app_train['HOUSETYPE_MODE'] = le.fit_transform(app_train['HOUSETYPE_MODE'])
 
 #%%
 # 使用不同的 HOUSETYPE_MODE 類別繪製圖形, 並使用 subplot 排版
@@ -58,6 +58,7 @@ app_train['HOUSETYPE_MODE'].replace({np.nan:''},inplace=True)
 
 unique_house_type = np.sort(app_train['HOUSETYPE_MODE'].unique())
 
+unique_house_type
 #%%
 nrows = len(unique_house_type)
 ncols = nrows // 2
@@ -68,9 +69,9 @@ for i in range(len(unique_house_type)):
     """
     Your Code Here
     """
-    app_train.loc[ app_train['HOUSETYPE_MODE'] ==unique_house_type[i],'HOUSETYPE_MODE' ].hist()
+    app_train.loc[ app_train['HOUSETYPE_MODE'] == unique_house_type[i],'AMT_CREDIT' ].hist()
     
-    plt.title(str(le.inverse_transform(unique_house_type[i])))
+    plt.title(unique_house_type[i])
 plt.show()    
 
 
