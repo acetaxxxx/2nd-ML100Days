@@ -26,7 +26,7 @@ import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
 import seaborn as sns # 另一個繪圖-樣式套件
-plt.style.use('ggplot')
+plt.style.use('dark_background')
 
 # 忽略警告訊息
 get_ipython().run_line_magic('matplotlib', 'inline')
@@ -64,11 +64,13 @@ plt.title('Correlation Heatmap');
 # 進一步我們檢查這三項變數在 Target 上的分布是否不同
 plt.figure(figsize = (24, 8))
 
+
+
 # 依不同 EXT_SOURCE 逐項繪製 KDE 圖形
 for i, source in enumerate(['EXT_SOURCE_1', 'EXT_SOURCE_2', 'EXT_SOURCE_3']):
     # 做 subplot
     plt.subplot(1, 3, i + 1)
-    
+    app_train[source].replace({np.nan:0},inplace=True)    
     # KDE 圖形
     sns.kdeplot(app_train.loc[app_train['TARGET'] == 0, source], label = 'target == 0')
     sns.kdeplot(app_train.loc[app_train['TARGET'] == 1, source], label = 'target == 1')
