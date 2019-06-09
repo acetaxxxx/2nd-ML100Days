@@ -69,10 +69,11 @@ cross_val_score(estimator, train_X, train_Y, cv=5).mean()
 
 #%%
 # 將 1stFlrSF 限制在你覺得適合的範圍內, 調整離群值
-"""
-Your Code Here
-"""
 
+df['1stFlrSF'] = df['1stFlrSF'].clip(500,2500)
+
+sns.regplot(x = df['1stFlrSF'][:train_num], y=train_Y)
+plt.show()
 # 做線性迴歸, 觀察分數
 train_X = MMEncoder.fit_transform(df)
 estimator = LinearRegression()
@@ -85,13 +86,31 @@ cross_val_score(estimator, train_X, train_Y, cv=5).mean()
 
 #%%
 # 將 1stFlrSF 限制在你覺得適合的範圍內, 捨棄離群值
-"""
-Your Code Here
-"""
+df_train = pd.read_csv(data_path + 'house_train.csv.gz')
 
+train_Y = np.log1p(df_train['SalePrice'])
+df = df_train.drop(['Id', 'SalePrice'] , axis=1)
+df = df[num_features]
+df = df.fillna(-1)
+MMEncoder = MinMaxScaler()
+train_num = train_Y.shape[0]
+
+
+df = df[ (df['1stFlrSF']>500) & (df['1stFlrSF']<2500)]
+df
+#%%
+df.index
+#%%
 # 做線性迴歸, 觀察分數
+train_Y  = train_Y[df.index]
+sns.regplot(x = df['1stFlrSF'][:train_num], y=train_Y)
+plt.show()
 train_X = MMEncoder.fit_transform(df)
 estimator = LinearRegression()
 cross_val_score(estimator, train_X, train_Y, cv=5).mean()
 
 
+
+
+#%%
+# 結果會變好 因為其實離群值會還是算一個資料點
