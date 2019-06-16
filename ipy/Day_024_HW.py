@@ -89,8 +89,23 @@ estimator = LogisticRegression()
 print(cross_val_score(estimator, train_X, train_Y, cv=5).mean())
 df_temp.head()
 
+
+
+
+
+
 #%%
 # 'Cabin'特徵雜湊 + 邏輯斯迴歸
+df_temp = pd.DataFrame()
+for c in df.columns:
+    df_temp[c] = LabelEncoder().fit_transform(df[c])
+df_temp['Cabin_Hash'] = df.reset_index()['Cabin'].map(lambda x : hash(x) % 3)
+train_X = df_temp[:train_num]
+estimator = LogisticRegression()
+print(cross_val_score(estimator, train_X, train_Y, cv=5).mean())
+df_temp.head()
+#%%
+
 
 
 
@@ -98,8 +113,13 @@ df_temp.head()
 
 #%%
 # 'Cabin'計數編碼 + 'Cabin'特徵雜湊 + 邏輯斯迴歸
-
-
+df_group  = df_temp.groupby(['Cabin'])['Name'].agg({'Cabin_Cnt':'size'}).reset_index()
+#df_group
+df_temp = df_temp.merge(df_group,how='left',on=['Cabin'])
+train_X = df_temp[:train_num]
+estimator = LogisticRegression()
+print(cross_val_score(estimator, train_X, train_Y, cv=5).mean())
+df_temp.head()
 #%%
 
 
