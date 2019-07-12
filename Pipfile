@@ -16,7 +16,7 @@ pillow = "*"
 scikit-image = "*"
 scipy = "*"
 requests = "*"
-sklearn = "*"
+scikit-learn = "*"
 urllib3 = ">=1.24.2"
 seaborn = "*"
 
